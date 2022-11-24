@@ -44,7 +44,7 @@ public class UsersController {
             return "users/new";
         }
         userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/id={id}/edit")
