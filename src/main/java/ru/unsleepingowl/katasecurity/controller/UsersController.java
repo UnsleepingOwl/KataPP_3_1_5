@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin/users")
 public class UsersController {
 
     private final UserService userService;
@@ -59,12 +59,12 @@ public class UsersController {
             return "users/edit";
         }
         userService.updateUser(user, id);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
     @DeleteMapping("/id={id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 }
