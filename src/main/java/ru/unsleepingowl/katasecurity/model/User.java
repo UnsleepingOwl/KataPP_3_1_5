@@ -9,6 +9,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -17,7 +19,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
 
@@ -36,12 +38,11 @@ public class User implements UserDetails {
     @Min(value = 1, message = "Age should be greater than 0")
     private Byte age;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "role_id")
-//            inverseJoinColumns = @JoinColumn(name = "id")
-    )
-    private Collection<Role> roles;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "users_roles",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }
@@ -50,6 +51,11 @@ public class User implements UserDetails {
         this.username = username;
         this.password = lastName;
         this.age = age;
+    }
+
+    public User(String username, String lastName, Byte age, Collection<Role> roles) {
+        this(username, lastName, age);
+        this.roles = (Set<Role>) roles;
     }
 
     @Override
@@ -67,12 +73,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     @Override
@@ -124,6 +130,6 @@ public class User implements UserDetails {
     }
 
     public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+        this.roles = (Set<Role>) roles;
     }
 }

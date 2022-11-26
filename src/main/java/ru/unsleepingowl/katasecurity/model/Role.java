@@ -3,9 +3,10 @@ package ru.unsleepingowl.katasecurity.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -15,6 +16,13 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "authority")
     private String authority;
+
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
+
+    public Role(Collection<User> users) {
+        this.users = users;
+    }
 
     public Role() {}
 
@@ -32,5 +40,13 @@ public class Role implements GrantedAuthority {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }

@@ -9,17 +9,17 @@
 
 <form th:method="POST" th:action="@{/users}" th:object="${newUser}">
 
-    <label for="name">Name: </label>
-    <input type="text" th:field="*{username}" id="name"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{username}">Name is incorrect</div>
+    <label for="username">Name: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username is incorrect</div>
     <br/>
 
-    <label for="name">Last name: </label>
+    <label for="username">Password: </label>
     <input type="text" th:field="*{password}" id="password"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('lastName')}" th:errors="*{password}">Last name is incorrect</div>
+    <div style="color:darkred" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password is incorrect</div>
     <br/>
 
-    <label for="name">Age: </label>
+    <label for="username">Age: </label>
     <input type="text" th:field="*{age}" id="age"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age is incorrect</div>
     <br/>

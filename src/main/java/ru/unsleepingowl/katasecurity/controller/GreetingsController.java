@@ -14,8 +14,8 @@ public class GreetingsController {
     public String printWelcome(ModelMap model) {
         List<String> strings = new ArrayList<>();
         strings.add("Welcome.");
-        strings.add("This is Spring MVC application. Version 5.3.23 \n");
+        strings.add("This is Spring Boot Security application. Version 5.3.23 \n");
         model.addAttribute("messages", strings);
-        return "start";
+        return "index";
     }
 }
