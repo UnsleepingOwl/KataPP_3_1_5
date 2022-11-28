@@ -18,8 +18,6 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    UserDetails loadUserByUsername(String username);
-
     User findByUsername(String username);
 
 

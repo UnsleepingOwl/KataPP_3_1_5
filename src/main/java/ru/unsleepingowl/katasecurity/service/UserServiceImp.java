@@ -2,8 +2,6 @@ package ru.unsleepingowl.katasecurity.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,14 +19,14 @@ import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
-public class ServiceImp implements UserService, UserDetailsService {
+public class UserServiceImp implements UserService {
 
     private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public ServiceImp(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -77,13 +75,4 @@ public class ServiceImp implements UserService, UserDetailsService {
         return userRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                user.getAuthorities()
-        );
-    }
 }
