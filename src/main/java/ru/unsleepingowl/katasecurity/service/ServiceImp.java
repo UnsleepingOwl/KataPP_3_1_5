@@ -52,6 +52,8 @@ public class ServiceImp implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void updateUser(User user, Long id) {
+        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
+        user.setRoles(getUserById(id).getRoles());
         user.setId(id);
         userRepository.save(user);
     }
@@ -85,7 +87,7 @@ public class ServiceImp implements UserService, UserDetailsService {
         );
     }
 
-    public BCryptPasswordEncoder getPASSWORD_ENCODER() {
+    public BCryptPasswordEncoder getPasswordEncoder() {
         return PASSWORD_ENCODER;
     }
 }

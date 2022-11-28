@@ -7,7 +7,11 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/users/id={id}(id=${editedUser.getId()})}" th:object="${editedUser}">
+<a href="#" th:href="@{/logout}">Log out</a>
+<hr/>
+<br/>
+
+<form th:method="PATCH" th:action="@{/admin/id={id}(id=${editedUser.getId()})}" th:object="${editedUser}">
 
     <label for="username">Name: </label>
     <input type="text" th:field="*{username}" id="username"/>

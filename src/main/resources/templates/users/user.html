@@ -6,9 +6,14 @@
     <title>Home page</title>
 </head>
 <body>
-<p th:text="${user.getId()}">VALUE</p>
-<p th:text="${user.getUsername()}">VALUE</p>
-<p th:text="${user.getAge()}">VALUE</p>
+
+<a href="#" th:href="@{/logout}">Log out</a>
+<hr/>
+<br/>
+
+<p th:text="${'ID: ' + current_user.getId()}">VALUE</p>
+<p th:text="${'Username: ' + current_user.getUsername()}">VALUE</p>
+<p th:text="${'Age: ' + current_user.getAge()}">VALUE</p>
 
 </form>
 </body>

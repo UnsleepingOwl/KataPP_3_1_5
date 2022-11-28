@@ -7,18 +7,18 @@
 </head>
 <body>
 
-<a href="/logout">Logout</a>
+<a href="#" th:href="@{/logout}">Log out</a>
 <hr/>
 <br/>
 
 <div th:each="user : ${users_list}">
-    <a th:href="@{/users/id={id}(id=${user.getId()})}" th:text="${'ID: ' + user.getId()} + ' | ' + 'Username: ' + ${user.getUsername()} + ' | ' + 'Age: ' + ${user.getAge()}">user </a>
+    <a th:href="@{/admin/id={id}(id=${user.getId()})}" th:text="${'ID: ' + user.getId()} + ' | ' + 'Username: ' + ${user.getUsername()} + ' | ' + 'Age: ' + ${user.getAge()}">user </a>
 </div>
 
 <hr/>
 <br/>
 
-<a href="/users/new">New user</a>
+<a href="/admin/new">New user</a>
 
 </body>
 </html>
