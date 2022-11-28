@@ -86,8 +86,4 @@ public class ServiceImp implements UserService, UserDetailsService {
                 user.getAuthorities()
         );
     }
-
-    public BCryptPasswordEncoder getPasswordEncoder() {
-        return PASSWORD_ENCODER;
-    }
 }
