@@ -6,19 +6,23 @@
     <title>User by ID</title>
 </head>
 <body>
-<p th:text="${user.getId()}">VALUE</p>
-<p th:text="${user.getName()}">VALUE</p>
-<p th:text="${user.getLastName()}">VALUE</p>
-<p th:text="${user.getAge()}">VALUE</p>
+
+<a href="#" th:href="@{/logout}">Log out</a>
+<hr/>
+<br/>
+
+<p th:text="${'ID: ' + user.getId()}">VALUE</p>
+<p th:text="${'Username: ' + user.getUsername()}">VALUE</p>
+<p th:text="${'Age: ' + user.getAge()}">VALUE</p>
 
 <hr/>
-<a th:href="@{/users/id={id}/edit(id=${user.getId()})}">Edit user</a>
+<a th:href="@{/admin/id={id}/edit(id=${user.getId()})}">Edit user</a>
 
 
 <br/>
 <hr/>
 
-<form th:method="DELETE" th:action="@{/users/id={id}(id=${user.getId()})}">
+<form th:method="DELETE" th:action="@{/admin/id={id}(id=${user.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 </body>
