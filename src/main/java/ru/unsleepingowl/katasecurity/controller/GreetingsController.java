@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class GreetingsController {
 
-    @GetMapping(value= "/")
+    @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
         List<String> strings = new ArrayList<>();
         strings.add("Welcome.");
@@ -24,10 +24,10 @@ public class GreetingsController {
         return "index";
     }
 
-    @GetMapping(value="/logout")
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping(value = "/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
