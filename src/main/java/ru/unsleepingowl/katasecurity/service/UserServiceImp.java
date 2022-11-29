@@ -1,78 +1,57 @@
 package ru.unsleepingowl.katasecurity.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.unsleepingowl.katasecurity.model.Role;
+import ru.unsleepingowl.katasecurity.dao.UserDao;
 import ru.unsleepingowl.katasecurity.model.User;
-import ru.unsleepingowl.katasecurity.repositories.RoleRepository;
-import ru.unsleepingowl.katasecurity.repositories.UserRepository;
 
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
-    private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UserDao userDao;
 
-    @Autowired
-    public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+    public UserServiceImp(UserDao userDao) {
+        this.userDao = userDao;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void addUser(User user) {
-        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByAuthority("ROLE_USER"));
-        user.setRoles(roles);
-        userRepository.save(user);
+        userDao.addUser(user);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void deleteUser(Long id) {
-        userRepository.delete(getUserById(id));
+        userDao.deleteUser(id);
     }
 
+    @Override
     @Transactional
-    @Override
     public void updateUser(User user, Long id) {
-        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-        user.setRoles(getUserById(id).getRoles());
-        user.setId(id);
-        userRepository.save(user);
+        userDao.updateUser(user, id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getUsersList() {
-        return userRepository.findAll();
+        return userDao.getUsersList();
     }
 
     @Override
-    public User findByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        return userRepository.findByUsername(username).get();
+    @Transactional(readOnly = true)
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userDao.getUserById(id);
     }
 
 }
