@@ -7,25 +7,18 @@ import org.springframework.web.bind.annotation.*;
 import ru.unsleepingowl.katasecurity.model.User;
 import ru.unsleepingowl.katasecurity.service.UserService;
 
-
 import javax.validation.Valid;
 import java.security.Principal;
 
 
 @Controller
 @RequestMapping("/")
-public class UsersController {
+public class AdminController {
 
     private final UserService userService;
 
-    public UsersController(UserService userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("/user")
-    public String getUser(Model model, Principal principal) {
-        model.addAttribute("current_user", userService.findByUsername(principal.getName()));
-        return "/users/user";
     }
 
     @GetMapping("/admin")
