@@ -1,6 +1,5 @@
 package ru.unsleepingowl.katasecurity.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import ru.unsleepingowl.katasecurity.model.User;
 
 import java.util.List;

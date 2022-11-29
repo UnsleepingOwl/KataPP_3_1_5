@@ -44,7 +44,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findByUsername(String username){
+    public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
