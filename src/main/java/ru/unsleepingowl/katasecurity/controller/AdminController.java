@@ -8,8 +8,6 @@ import ru.unsleepingowl.katasecurity.model.User;
 import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
-import java.security.Principal;
-
 
 @Controller
 @RequestMapping("/")
