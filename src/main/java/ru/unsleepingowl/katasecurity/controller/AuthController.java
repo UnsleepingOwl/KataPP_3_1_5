@@ -9,19 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class AuthController {
 
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
-        List<String> strings = new ArrayList<>();
-        strings.add("Welcome.");
-        strings.add("This is Spring Boot Security application. Version 5.3.23 \n");
-        model.addAttribute("messages", strings);
-        return "index";
+        return "login";
     }
 
     @GetMapping(value = "/logout")
