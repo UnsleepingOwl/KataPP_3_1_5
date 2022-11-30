@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -14,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user_security")
+@Table(name = "user_bootstrap")
 public class User implements UserDetails {
 
     @Id
@@ -22,24 +23,32 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
 
-
-    @Column(name = "username")
-    @NotEmpty(message = "Username should not be empty")
+    @Column(name = "email")
+    @Email(message = "Email should be valid")
     @Size(min = 2, max = 24, message = "Username should be between 2 and 24 characters")
     private String username;
+
+    @Column(name = "first_name")
+    @NotEmpty(message = "First name should not be empty")
+    @Size(min = 2, max = 40, message = "Username should be between 2 and 30 characters")
+    private String firstName;
+
+    @NotEmpty(message = "Last name should not be empty")
+    @Column(name = "last_name")
+    @Size(min = 2, max = 40, message = "Username should be between 2 and 40 characters")
+    private String lastName;
 
     @Column(name = "password")
     @NotEmpty(message = "Password name should not be empty")
     @Size(min = 8, message = "Password should be at least 8 characters long")
     private String password;
 
-
     @Column(name = "age")
     @Min(value = 1, message = "Age should be greater than 0")
     private Byte age;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
+    @JoinTable(name = "bootstrap_roles",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
@@ -47,14 +56,16 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String lastName, Byte age) {
-        this.username = username;
-        this.password = lastName;
+    public User(String email, String password, String firstName, String lastName, Byte age) {
+        this.username = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
     }
 
-    public User(String username, String lastName, Byte age, Collection<Role> roles) {
-        this(username, lastName, age);
+    public User(String email, String password, String firstName, String lastName, Byte age, Collection<Role> roles) {
+        this(email, password, firstName, lastName, age);
         this.roles = (Set<Role>) roles;
     }
 
@@ -62,7 +73,9 @@ public class User implements UserDetails {
     public String toString() {
         return "[ " +
                 "ID = " + id + " | " +
-                "Name = '" + username + '\'' + " | " +
+                "Email = '" + username + '\'' + " | " +
+                "First Name = '" + firstName + '\'' + " | " +
+                "Last Name = '" + lastName + '\'' + " | " +
                 "Age = '" + age + '\'' + " ]";
     }
 
@@ -123,6 +136,22 @@ public class User implements UserDetails {
 
     public void setAge(Byte age) {
         this.age = age;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Collection<Role> getRoles() {

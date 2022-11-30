@@ -12,7 +12,7 @@
 <br/>
 
 <div th:each="user : ${users_list}">
-    <a th:href="@{/admin/id={id}(id=${user.getId()})}" th:text="${'ID: ' + user.getId()} + ' | ' + 'Username: ' + ${user.getUsername()} + ' | ' + 'Age: ' + ${user.getAge()}">user </a>
+    <a th:href="@{/admin/id={id}(id=${user.getId()})}" th:text="${'ID: ' + user.getId()} + ' | ' + 'Email: ' + ${user.getUsername()} + ' | ' + 'First Name: ' + ${user.getFirstName()} + ' | ' + 'Last Name: ' + ${user.getLastName()} + ' | ' + 'Age: ' + ${user.getAge()}">user </a>
 </div>
 
 <hr/>

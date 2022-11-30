@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class GreetingsController {
+public class AuthController {
 
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {

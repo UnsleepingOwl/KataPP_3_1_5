@@ -13,14 +13,24 @@
 
 <form th:method="PATCH" th:action="@{/admin/id={id}(id=${editedUser.getId()})}" th:object="${editedUser}">
 
-    <label for="username">Name: </label>
+    <label for="username">Email: </label>
     <input type="text" th:field="*{username}" id="username"/>
-    <div style="color:darkred" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name is incorrect</div>
+    <div style="color:darkred" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username is incorrect</div>
     <br/>
 
     <label for="username">Password: </label>
     <input type="text" th:field="*{password}" id="password"/>
     <div style="color:darkred" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password is incorrect</div>
+    <br/>
+
+    <label for="username">First Name: </label>
+    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Username is incorrect</div>
+    <br/>
+
+    <label for="username">Last Name: </label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <div style="color:darkred" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Username is incorrect</div>
     <br/>
 
     <label for="username">Age: </label>
