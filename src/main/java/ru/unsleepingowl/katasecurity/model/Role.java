@@ -50,4 +50,9 @@ public class Role implements GrantedAuthority {
     public void setUsers(Collection<User> users) {
         this.users = users;
     }
+
+    @Override
+    public String toString() {
+        return getAuthority().substring(5);
+    }
 }

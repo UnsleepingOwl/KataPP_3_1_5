@@ -84,6 +84,10 @@ public class User implements UserDetails {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toList());
     }
 
+    public String rolesToString() {
+        return roles.stream().map(Role::toString).collect(Collectors.joining(" "));
+    }
+
     @Override
     public String getPassword() {
         return this.password;
