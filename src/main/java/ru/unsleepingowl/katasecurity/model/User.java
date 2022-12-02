@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user_bootstrap")
+@Table(name = "bootstrap_user")
 public class User implements UserDetails {
 
     @Id
