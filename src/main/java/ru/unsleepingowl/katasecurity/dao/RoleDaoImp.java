@@ -12,7 +12,7 @@ import java.util.Set;
 public class RoleDaoImp implements RoleDao {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void addRole(Role role) {
