@@ -8,6 +8,7 @@ import ru.unsleepingowl.katasecurity.model.User;
 import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,7 +21,8 @@ public class AdminController {
     }
 
     @GetMapping(value = "")
-    public String getUsersList(Model model) {
+    public String getUsersList(Model model, Principal principal) {
+        model.addAttribute("current_user", userService.findByUsername(principal.getName()));
         model.addAttribute("users_list", userService.getUsersList());
         return "admin";
     }
