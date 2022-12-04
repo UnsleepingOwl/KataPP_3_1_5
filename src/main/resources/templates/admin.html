@@ -61,6 +61,9 @@
         }
 
         .sidebar {
+            position: fixed;
+            top: 8%;
+
             display: inline;
             float: left;
             background: #fff;
@@ -70,6 +73,10 @@
         }
 
         .content {
+            position: fixed;
+            top: 8%;
+            left: 20%;
+
             display: inline-block;
             float: left;
 
@@ -120,7 +127,8 @@
             <!--PILLS-->
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
-                    <a data-toggle="pill" class="nav-link active" id="admin_pill_tab" href="#admin_panel">&nbsp;Admin</a>
+                    <a data-toggle="pill" class="nav-link active" id="admin_pill_tab"
+                       href="#admin_panel">&nbsp;Admin</a>
                 </li>
                 <li class="nav-item">
                     <a data-toggle="pill" class="nav-link" id="user_pill_tab" href="#user_panel">&nbsp;User</a>
@@ -193,7 +201,8 @@
                     <h1>Admin panel</h1>
 
                     <!-- |ADMIN| TABS-->
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs"
+                        style="max-width: 98%;">
                         <li class="nav-item">
                             <a data-toggle="tab" class="nav-link active" id="all_users_tab" href="#all_users">Users
                                 table</a>
@@ -218,10 +227,11 @@
                             <!-- |ADMIN| |ALL USERS| END OF OUTER TABLE HEAD-->
 
                             <!-- |ADMIN| |ALL USERS| OUTER TABLE COLUMN-->
-                            <div class="border shadow-sm p-4 bg-white rounded-bottom topTable">
+                            <div class="border shadow-sm p-4 bg-white rounded-bottom topTable"
+                                 style="max-width: 98%;">
 
                                 <!-- |ADMIN| |ALL USERS| INNER TABLE-->
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" style="vertical-align: center">
 
                                     <thead>
                                     <tr>
@@ -231,6 +241,8 @@
                                         <th scope="col">Age</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Role</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                     </thead>
 
@@ -242,6 +254,24 @@
                                         <td th:text="${user.getAge()}">VALUE</td>
                                         <td th:text="${user.getUsername()}">VALUE</td>
                                         <td th:text="${user.rolesToString()}">VALUE</td>
+
+                                        <!-- |ADMIN| |ALL USERS| EDIT-->
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                                                    th:data-target="${'#editUser'+user.id}">
+                                                Edit
+                                            </button>
+                                        </td>
+                                        <!-- |ADMIN| |ALL USERS| END OF EDIT-->
+
+                                        <!-- |ADMIN| |ALL USERS| DELETE-->
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    th:data-target="${'#deleteUser'+user.id}">
+                                                Delete
+                                            </button>
+                                        </td>
+                                        <!-- |ADMIN| |ALL USERS| END OF DELETE-->
                                     </tr>
                                     </tbody>
 
@@ -251,8 +281,6 @@
                             <!-- |ADMIN| |ALL USERS| END OF OUTER TABLE COLUMN-->
                         </div>
                         <!-- |ADMIN| END OF ALL USERS-->
-
-
 
 
                         <!-- |ADMIN| NEW USER-->
@@ -269,15 +297,98 @@
                             <div class="border shadow-sm p-4 bg-white rounded-bottom topTable"
                                  style="max-width: 98%;">
 
+                                <!-- |ADMIN| |NEW USER| FORM-->
+                                <div class="m-auto" style="max-width: 40%; alignment: center;">
+
+                                    <form th:method="POST"
+                                          th:action="@{/admin/new}"
+                                          th:object="${new_user}">
+
+                                        <!-- |ADMIN| |NEW USER| FIRST NAME-->
+                                        <div class="form-group text-center">
+                                            <label for="first_name" style="margin-bottom: 0">
+                                                <strong>First name</strong>
+                                            </label>
+                                            <input class="form-control form-control-sm"
+                                                   type="text" th:field="*{firstName}" id="first_name"
+                                                   placeholder="First name" required>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF FIRST NAME-->
+
+                                        <!-- |ADMIN| |NEW USER| LAST NAME-->
+                                        <div class="form-group text-center">
+                                            <label for="last_name" style="margin-bottom: 0">
+                                                <strong>Last name</strong>
+                                            </label>
+                                            <input class="form-control form-control-sm"
+                                                   type="text" th:field="*{lastName}" id="last_name"
+                                                   placeholder="Last name" required>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF LAST NAME-->
+
+                                        <!-- |ADMIN| |NEW USER| AGE-->
+                                        <div class="form-group text-center">
+                                            <label for="age" style="margin-bottom: 0">
+                                                <strong>Age</strong>
+                                            </label>
+                                            <input class="form-control form-control-sm"
+                                                   type="number" th:field="*{age}" id="age"
+                                                   placeholder="Age" required>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF AGE-->
+
+                                        <!-- |ADMIN| |NEW USER| EMAIL-->
+                                        <div class="form-group text-center">
+                                            <label for="username" style="margin-bottom: 0">
+                                                <strong>Email</strong>
+                                            </label>
+                                            <input class="form-control form-control-sm"
+                                                   type="text" th:field="*{username}"
+                                                   id="username"
+                                                   placeholder="Email" required>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF EMAIL-->
+
+                                        <!-- |ADMIN| |NEW USER| PASSWORD-->
+                                        <div class="form-group text-center">
+                                            <label for="password" style="margin-bottom: 0">
+                                                <strong>Password</strong>
+                                            </label>
+                                            <input class="form-control form-control-sm"
+                                                   type="text" th:field="*{password}"
+                                                   id="password"
+                                                   placeholder="Password" required>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF PASSWORD-->
+
+                                        <!-- |ADMIN| |NEW USER| ROLE-->
+                                        <div class="form-group text-center">
+                                            <label for="role" style="margin-bottom: 0">
+                                                <strong>Role</strong>
+                                            </label>
+                                            <select class="form-control form-control-sm"
+                                                    multiple size="2"
+                                                    id="role" required>
+                                                <th:block th:each="role : ${roles_set}">
+                                                    <option th:field="*{roles}"
+                                                            th:text="${role}"
+                                                            th:value="${role.roleName}"></option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                        <!-- |ADMIN| |NEW USER| END OF ROLE-->
+
+                                        <div class="text-center">
+                                        <button class="btn btn-success" type="submit">Add new User</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <!-- |ADMIN| |NEW USER| END OF FORM-->
                             </div>
                             <!-- |ADMIN| |NEW USER| END OF OUTER TABLE COLUMN-->
-
                         </div>
                         <!-- |ADMIN| END OF NEW USER-->
-
-
-
-
                     </div>
                     <!-- |ADMIN| END OF TABS CONTENT-->
                 </div>

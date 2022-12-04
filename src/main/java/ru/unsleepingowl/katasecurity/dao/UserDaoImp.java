@@ -31,9 +31,9 @@ public class UserDaoImp implements UserDao {
     @Override
     public void addUser(User user) {
         user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.findByAuthority("ROLE_USER"));
-        user.setRoles(roles);
+
+//        user.setFirstName(user.getRoles().toString());
+
         entityManager.persist(user);
     }
 
@@ -68,5 +68,14 @@ public class UserDaoImp implements UserDao {
     public User findByUsername(String username) {
         return entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username).getSingleResult();
+    }
+
+    @Override
+    public User createUser() {
+        User newUser = new User();
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleDao.findByAuthority("ROLE_USER"));
+        newUser.setRoles(roles);
+        return newUser;
     }
 }

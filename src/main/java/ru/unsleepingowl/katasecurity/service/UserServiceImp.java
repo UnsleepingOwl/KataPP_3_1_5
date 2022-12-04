@@ -49,6 +49,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public User createUser() {
+        return userDao.createUser();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return userDao.getUserById(id);

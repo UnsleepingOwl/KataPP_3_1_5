@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.unsleepingowl.katasecurity.model.User;
+import ru.unsleepingowl.katasecurity.service.RoleService;
 import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
@@ -15,15 +16,19 @@ import java.security.Principal;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping(value = "")
     public String getUsersList(Model model, Principal principal) {
         model.addAttribute("current_user", userService.findByUsername(principal.getName()));
         model.addAttribute("users_list", userService.getUsersList());
+        model.addAttribute("new_user", userService.createUser());
+        model.addAttribute("roles_set",roleService.getRolesSet());
         return "admin";
     }
 
@@ -33,13 +38,8 @@ public class AdminController {
         return "users/id";
     }
 
-    @GetMapping(value = "/new")
-    public String newUserForm(@ModelAttribute("newUser") User user) {
-        return "users/new";
-    }
-
-    @PostMapping(value = "")
-    public String createUser(@ModelAttribute("newUser") @Valid User user, BindingResult bindingResult) {
+    @PostMapping(value = "/new")
+    public String createUser(@ModelAttribute("new_user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "users/new";
         }
@@ -49,12 +49,12 @@ public class AdminController {
 
     @GetMapping(value = "/id={id}/edit")
     public String editUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("editedUser", userService.getUserById(id));
+        model.addAttribute("edited_user", userService.getUserById(id));
         return "users/edit";
     }
 
     @PatchMapping(value = "/id={id}")
-    public String updateUser(@ModelAttribute("editedUser") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
+    public String updateUser(@ModelAttribute("edited_user") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
             return "users/edit";
         }
