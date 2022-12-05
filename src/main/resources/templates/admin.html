@@ -27,7 +27,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 999;
 
             width: 100%;
             height: 100%;
@@ -45,6 +44,15 @@
             text-decoration: none;
         }
 
+        .modal {
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .modal-backdrop {
+            display: none;
+        }
+
         .header {
             background: -moz-mac-accentdarkestshadow;
             color: white;
@@ -54,7 +62,6 @@
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 999;
 
             width: 100%;
             height: 10%;
@@ -63,6 +70,7 @@
         .sidebar {
             position: fixed;
             top: 8%;
+            z-index: -1;
 
             display: inline;
             float: left;
@@ -257,10 +265,10 @@
 
                                         <!-- |ADMIN| |ALL USERS| EDIT-->
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
-                                                    th:data-target="${'#editUser'+user.id}">
-                                                Edit
-                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-info"
+                                                    data-toggle="modal"
+                                                    th:data-target="${'#editUser'+user.id}">Edit</button>
                                         </td>
                                         <!-- |ADMIN| |ALL USERS| END OF EDIT-->
 
@@ -270,6 +278,117 @@
                                                     th:data-target="${'#deleteUser'+user.id}">
                                                 Delete
                                             </button>
+
+                                            <!--|ADMIN| |ALL USERS| |DELETE| MODAL-->
+
+                                                <div class="modal fade"
+                                                     th:id="${'deleteUser'+user.id}"
+                                                     tabindex="-1"
+                                                     aria-hidden="true">
+
+                                                    <div class="modal-dialog">
+
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete user</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+
+                                                            <div class="modal-body m-auto">
+                                                            <form th:id="${'deleteForm'+user.id}"
+                                                                  th:method="DELETE"
+                                                                  th:action="@{/admin/id={id}(id=${user.getId()})}">
+                                                                <fieldset disabled>
+
+                                                                    <!-- |ADMIN| |ALL USERS| |DELETE| ID-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_id" style="margin-bottom: 0">
+                                                                            <strong>First name</strong>
+                                                                        </label>
+                                                                        <input class="form-control form-control-sm"
+                                                                               type="text" th:value="*{user.id}" id="delete_id">
+                                                                    </div>
+                                                                    <!-- |ADMIN| |ALL USERS| |DELETE| ID-->
+
+                                                                    <!-- |ADMIN| |ALL USERS| |DELETE| FIRST NAME-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_first_name" style="margin-bottom: 0">
+                                                                            <strong>First name</strong>
+                                                                        </label>
+                                                                        <input class="form-control form-control-sm"
+                                                                               type="text" th:value="*{user.firstName}" id="delete_first_name">
+                                                                    </div>
+                                                                    <!-- |ADMIN| |ALL USERS| |DELETE| END OF FIRST NAME-->
+
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| LAST NAME-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_last_name" style="margin-bottom: 0">
+                                                                            <strong>Last name</strong>
+                                                                        </label>
+                                                                        <input class="form-control form-control-sm"
+                                                                               type="text" th:value="*{user.lastName}" id="delete_last_name">
+                                                                    </div>
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| END OF LAST NAME-->
+
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| AGE-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_age" style="margin-bottom: 0">
+                                                                            <strong>Age</strong>
+                                                                        </label>
+                                                                        <input class="form-control form-control-sm"
+                                                                               type="number" th:value="*{user.age}" id="delete_age">
+                                                                    </div>
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| END OF AGE-->
+
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| EMAIL-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_username" style="margin-bottom: 0">
+                                                                            <strong>Email</strong>
+                                                                        </label>
+                                                                        <input class="form-control form-control-sm"
+                                                                               type="text" th:value="*{user.username}"
+                                                                               id="delete_username">
+                                                                    </div>
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| END OF EMAIL-->
+
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| ROLE-->
+                                                                    <div class="form-group text-center">
+                                                                        <label for="delete_role" style="margin-bottom: 0">
+                                                                            <strong>Role</strong>
+                                                                        </label>
+                                                                        <select class="form-control form-control-sm"
+                                                                                multiple size="2"
+                                                                                id="delete_role">
+                                                                            <th:block th:each="role : ${roles_set}">
+                                                                                <option th:text="${role}"
+                                                                                        th:value="${role.roleName}"></option>
+                                                                            </th:block>
+                                                                        </select>
+                                                                    </div>
+                                                                    <!-- |ADMIN| |NEW USER| |DELETE| END OF ROLE-->
+
+                                                                </fieldset>
+
+                                                            </form>
+                                                            </div>
+
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary"
+                                                                    type="button"
+                                                                    data-dismiss="modal">Close</button>
+                                                            <button class="btn btn-danger"
+                                                                    type="submit"
+                                                                    th:form="${'deleteForm'+user.getId()}">Delete</button>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                </div>
+                                            <!--|ADMIN| |ALL USERS| |DELETE| END OF MODAL-->
+
                                         </td>
                                         <!-- |ADMIN| |ALL USERS| END OF DELETE-->
                                     </tr>
@@ -372,7 +491,8 @@
                                                 <th:block th:each="role : ${roles_set}">
                                                     <option th:field="*{roles}"
                                                             th:text="${role}"
-                                                            th:value="${role.roleName}"></option>
+                                                            th:value="${role}"></option>
+                                                    <!--th:value="${role.roleName}"></option>-->
                                                 </th:block>
                                             </select>
                                         </div>

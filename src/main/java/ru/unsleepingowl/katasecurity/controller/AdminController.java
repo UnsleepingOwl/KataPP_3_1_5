@@ -28,7 +28,7 @@ public class AdminController {
         model.addAttribute("current_user", userService.findByUsername(principal.getName()));
         model.addAttribute("users_list", userService.getUsersList());
         model.addAttribute("new_user", userService.createUser());
-        model.addAttribute("roles_set",roleService.getRolesSet());
+        model.addAttribute("roles_set", roleService.getRolesSet());
         return "admin";
     }
 

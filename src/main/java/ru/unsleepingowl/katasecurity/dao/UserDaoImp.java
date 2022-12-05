@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -31,9 +32,9 @@ public class UserDaoImp implements UserDao {
     @Override
     public void addUser(User user) {
         user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-
-//        user.setFirstName(user.getRoles().toString());
-
+        user.setFirstName(user.getRoles().toString());
+//        Set<Role> roles = user.getRoles().stream().map(r -> roleDao.findByAuthority(r.getRoleName())).collect(Collectors.toSet());
+//        user.setRoles(roles);
         entityManager.persist(user);
     }
 
