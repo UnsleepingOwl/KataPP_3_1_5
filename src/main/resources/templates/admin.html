@@ -378,10 +378,9 @@
                                                                         <select class="form-control form-control-sm"
                                                                                 multiple size="2"
                                                                                 id="edit_role" required>
-                                                                            <th:block th:each="role : ${roles_set}">
-                                                                                <option th:text="${role}"
-                                                                                        th:value="${role.authority}"></option>
-                                                                            </th:block>
+                                                                            <option th:each="role : ${roles_set}"
+                                                                                    th:text="${role}"
+                                                                                    th:value="${role.authority}"/>
                                                                         </select>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF ROLE-->
@@ -641,16 +640,13 @@
 
                                             <select class="form-control form-control-sm"
                                                     multiple size="2"
-                                                    name="new_role"
-                                                    id="new_role" required
-                                                    th:field="*{roles}">
-                                                <option th:each="role : ${roles_set}"
-                                                        th:value="${role.id}"
-                                                        th:text="${role}"/>
+                                                    id="new_role" required>
+                                                <th:block th:each="role : ${roles_set}">
+                                                    <option th:field="*{roles}"
+                                                            th:text="${role}"
+                                                            th:value="${role.authority}"></option>
+                                                </th:block>
                                             </select>
-
-
-
 
                                         </div>
                                         <!-- |ADMIN| |NEW USER| END OF ROLE-->
