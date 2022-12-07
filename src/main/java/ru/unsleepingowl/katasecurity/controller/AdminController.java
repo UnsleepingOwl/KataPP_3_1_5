@@ -53,6 +53,11 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";
         }
+        System.out.println("------------------------------------");
+        System.out.println("------------------------------------");
+        System.out.println("------------------------------------");
+        System.out.println(rolesStringSet);
+
         userService.updateUser(user, id, rolesStringSet);
         return "redirect:/admin";
     }

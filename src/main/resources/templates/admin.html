@@ -295,7 +295,7 @@
                                                         <!-- |ADMIN| |ALL USERS| |EDIT| FORM-->
                                                         <div class="modal-body m-auto">
                                                             <form th:id="${'editForm'+user.id}"
-                                                                  th:method="PATCH"
+                                                                  th:method="PUT"
                                                                   th:action="@{/admin/id={id}(id=${user.getId()})}">
 
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| ID-->
@@ -375,7 +375,6 @@
                                                                                style="margin-bottom: 0">
                                                                             <strong>Role</strong>
                                                                         </label>
-
                                                                         <select class="form-control form-control-sm"
                                                                                 multiple size="2"
                                                                                 id="edit_role" required
