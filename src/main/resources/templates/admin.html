@@ -636,12 +636,24 @@
                                             </label>
                                             <select class="form-control form-control-sm"
                                                     multiple size="2"
+                                                    id="new_role" required>
+                                                <th:block th:each="role : ${roles_set}">
+                                                    <option th:field="*{roles}"
+                                                            th:text="${role.authority.substring(5)}"
+                                                            th:value="${role.authority}"></option>
+                                                </th:block>
+                                            </select>
+
+                                            <!--
+                                            <select class="form-control form-control-sm"
+                                                    multiple size="2"
                                                     id="new_role" required
                                                     th:field="*{roles}">
                                                 <option th:each="role : ${roles_set}"
                                                         th:value="${role.authority}"
                                                         th:text="${role.authority.substring(5)}"/>
                                             </select>
+                                            -->
 
                                         </div>
                                         <!-- |ADMIN| |NEW USER| END OF ROLE-->
