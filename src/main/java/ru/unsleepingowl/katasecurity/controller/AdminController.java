@@ -10,6 +10,8 @@ import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,31 +34,19 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping(value = "/id={id}")
-    public String getUserById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "users/id";
-    }
-
     @PostMapping(value = "/new")
     public String createUser(@ModelAttribute("new_user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "users/new";
+            return "redirect:/admin";
         }
         userService.addUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/id={id}/edit")
-    public String editUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("edited_user", userService.getUserById(id));
-        return "users/edit";
-    }
-
-    @PatchMapping(value = "/id={id}")
-    public String updateUser(@ModelAttribute("edited_user") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
+    @PutMapping(value = "/id={id}")
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
-            return "users/edit";
+            return "redirect:/admin";
         }
         userService.updateUser(user, id);
         return "redirect:/admin";

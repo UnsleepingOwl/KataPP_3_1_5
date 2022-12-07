@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,11 +32,13 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void addUser(User user) {
-        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-        user.setFirstName(user.getRoles().toString());
-//        Set<Role> roles = user.getRoles().stream().map(r -> roleDao.findByAuthority(r.getRoleName())).collect(Collectors.toSet());
-//        user.setRoles(roles);
-        entityManager.persist(user);
+            user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println(user.getRoles());
+            user.setRoles(user.getRoles().stream().map(r -> roleDao.findByAuthority(r.getAuthority())).collect(Collectors.toSet()));
+            entityManager.persist(user);
     }
 
     @Override
