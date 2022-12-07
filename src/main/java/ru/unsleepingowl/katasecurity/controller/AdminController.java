@@ -43,7 +43,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PutMapping(value = "/id={id}")
+    @PatchMapping(value = "/id={id}")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";

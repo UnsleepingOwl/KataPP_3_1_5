@@ -295,7 +295,7 @@
                                                         <!-- |ADMIN| |ALL USERS| |EDIT| FORM-->
                                                         <div class="modal-body m-auto">
                                                             <form th:id="${'editForm'+user.id}"
-                                                                  th:method="PUT"
+                                                                  th:method="PATCH"
                                                                   th:action="@{/admin/id={id}(id=${user.getId()})}">
 
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| ID-->
@@ -364,8 +364,8 @@
                                                                             <strong>Password</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="password" th:value="*{user.password}"
-                                                                               id="edit_password" required>
+                                                                               type="password" value=""
+                                                                               id="edit_password">
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF PASSWORD-->
 
@@ -379,7 +379,7 @@
                                                                                 multiple size="2"
                                                                                 id="edit_role" required>
                                                                             <option th:each="role : ${roles_set}"
-                                                                                    th:text="${role}"
+                                                                                    th:text="${role.authority.substring(5)}"
                                                                                     th:value="${role.authority}"/>
                                                                         </select>
                                                                     </div>
@@ -511,10 +511,9 @@
                                                                         <select class="form-control form-control-sm"
                                                                                 multiple size="2"
                                                                                 id="delete_role">
-                                                                            <th:block th:each="role : ${roles_set}">
-                                                                                <option th:text="${role}"
-                                                                                        th:value="${role.authority}"></option>
-                                                                            </th:block>
+                                                                                <option th:each="role : ${roles_set}"
+                                                                                        th:text="${role.authority.substring(5)}"
+                                                                                        th:value="${role.authority}"/>
                                                                         </select>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |DELETE| END OF ROLE-->
@@ -643,7 +642,7 @@
                                                     id="new_role" required>
                                                 <th:block th:each="role : ${roles_set}">
                                                     <option th:field="*{roles}"
-                                                            th:text="${role}"
+                                                            th:text="${role.authority.substring(5)}"
                                                             th:value="${role.authority}"></option>
                                                 </th:block>
                                             </select>

@@ -85,7 +85,7 @@ public class User implements UserDetails {
     }
 
     public String rolesToString() {
-        return roles.stream().map(Role::toString).collect(Collectors.joining(" "));
+        return roles.stream().map(r -> r.toString().substring(5)).collect(Collectors.joining(" "));
     }
 
     @Override
