@@ -375,17 +375,17 @@
                                                                                style="margin-bottom: 0">
                                                                             <strong>Role</strong>
                                                                         </label>
+
                                                                         <select class="form-control form-control-sm"
                                                                                 multiple size="2"
-                                                                                id="edit_role" required>
+                                                                                id="edit_role" required
+                                                                                name="edit_roles_string_set">
                                                                             <option th:each="role : ${roles_set}"
-                                                                                    th:text="${role.authority.substring(5)}"
-                                                                                    th:value="${role.authority}"/>
+                                                                                    th:value="${role.authority}"
+                                                                                    th:text="${role.authority.substring(5)}"/>
                                                                         </select>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF ROLE-->
-
-                                                                </fieldset>
                                                             </form>
                                                         </div>
                                                         <!-- |ADMIN| |ALL USERS| |EDIT| END OF FORM-->
@@ -511,9 +511,9 @@
                                                                         <select class="form-control form-control-sm"
                                                                                 multiple size="2"
                                                                                 id="delete_role">
-                                                                                <option th:each="role : ${roles_set}"
-                                                                                        th:text="${role.authority.substring(5)}"
-                                                                                        th:value="${role.authority}"/>
+                                                                            <option th:each="role : ${roles_set}"
+                                                                                    th:value="${role.authority}"
+                                                                                    th:text="${role.authority.substring(5)}"/>
                                                                         </select>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |DELETE| END OF ROLE-->
@@ -637,7 +637,7 @@
                                             <select class="form-control form-control-sm"
                                                     multiple size="2"
                                                     id="new_role" required
-                                                    name="roles_string_set">
+                                                    name="new_roles_string_set">
                                                 <option th:each="role : ${roles_set}"
                                                         th:field="*{roles}"
                                                         th:value="${role.authority}"

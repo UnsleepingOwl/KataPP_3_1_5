@@ -10,7 +10,7 @@ public interface UserService {
 
     void addUser(User user, Set<String> rolesStringSet);
     void deleteUser(Long id);
-    void updateUser(User user, Long id);
+    void updateUser(User user, Long id, Set<String> rolesStringSet);
     List<User> getUsersList();
     User getUserById(Long id);
     User findByUsername(String username);

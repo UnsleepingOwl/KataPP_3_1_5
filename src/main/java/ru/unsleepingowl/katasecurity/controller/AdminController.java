@@ -37,7 +37,7 @@ public class AdminController {
     @PostMapping(value = "/new")
     public String createUser(@ModelAttribute("new_user") @Valid User user,
                              BindingResult bindingResult,
-                             @RequestParam(value = "roles_string_set") Set<String> rolesStringSet) {
+                             @RequestParam(value = "new_roles_string_set") Set<String> rolesStringSet) {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";
         }
@@ -46,11 +46,14 @@ public class AdminController {
     }
 
     @PatchMapping(value = "/id={id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("id") Long id) {
+    public String updateUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult,
+                             @PathVariable("id") Long id,
+                             @RequestParam(value = "edit_roles_string_set") Set<String> rolesStringSet) {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";
         }
-        userService.updateUser(user, id);
+        userService.updateUser(user, id, rolesStringSet);
         return "redirect:/admin";
     }
 

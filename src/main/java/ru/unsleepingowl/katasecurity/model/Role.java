@@ -18,13 +18,6 @@ public class Role implements GrantedAuthority {
     @Column(name = "authority")
     private String authority;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Collection<User> users;
-//
-//    private Role(Collection<User> users) {
-//        this.users = users;
-//    }
-
     public Role() {
     }
 

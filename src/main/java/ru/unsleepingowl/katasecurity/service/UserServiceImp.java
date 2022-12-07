@@ -33,8 +33,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user, Long id) {
-        userDao.updateUser(user, id);
+    public void updateUser(User user, Long id, Set<String> rolesStringSet) {
+        userDao.updateUser(user, id, rolesStringSet);
     }
 
     @Override
