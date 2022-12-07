@@ -517,7 +517,6 @@
                                                                         </select>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |DELETE| END OF ROLE-->
-
                                                                 </fieldset>
                                                             </form>
                                                         </div>
@@ -634,27 +633,16 @@
                                             <label for="new_role" style="margin-bottom: 0">
                                                 <strong>Role</strong>
                                             </label>
-                                            <select class="form-control form-control-sm"
-                                                    multiple size="2"
-                                                    id="new_role" required>
-                                                <th:block th:each="role : ${roles_set}">
-                                                    <option th:field="*{roles}"
-                                                            th:text="${role.authority.substring(5)}"
-                                                            th:value="${role.authority}"></option>
-                                                </th:block>
-                                            </select>
 
-                                            <!--
                                             <select class="form-control form-control-sm"
                                                     multiple size="2"
                                                     id="new_role" required
-                                                    th:field="*{roles}">
+                                                    name="roles_string_set">
                                                 <option th:each="role : ${roles_set}"
+                                                        th:field="*{roles}"
                                                         th:value="${role.authority}"
                                                         th:text="${role.authority.substring(5)}"/>
                                             </select>
-                                            -->
-
                                         </div>
                                         <!-- |ADMIN| |NEW USER| END OF ROLE-->
 

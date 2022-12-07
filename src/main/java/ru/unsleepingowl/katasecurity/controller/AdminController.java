@@ -35,11 +35,13 @@ public class AdminController {
     }
 
     @PostMapping(value = "/new")
-    public String createUser(@ModelAttribute("new_user") @Valid User user, BindingResult bindingResult) {
+    public String createUser(@ModelAttribute("new_user") @Valid User user,
+                             BindingResult bindingResult,
+                             @RequestParam(value = "roles_string_set") Set<String> rolesStringSet) {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";
         }
-        userService.addUser(user);
+        userService.addUser(user, rolesStringSet);
         return "redirect:/admin";
     }
 
