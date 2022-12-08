@@ -10,7 +10,6 @@ import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -50,11 +49,6 @@ public class AdminController {
                              @PathVariable("id") Long id,
                              BindingResult bindingResult,
                              @RequestParam(value = "edit_roles_string_set") Set<String> rolesStringSet) {
-        System.out.println("------------------------------------");
-        System.out.println("------------------------------------");
-        System.out.println("------------------------------------");
-        System.out.println(rolesStringSet);
-        System.out.println(user.toString());
         if (bindingResult.hasErrors()) {
             System.out.println("ERROR");
             return "redirect:/admin";

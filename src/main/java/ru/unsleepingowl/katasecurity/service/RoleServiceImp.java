@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.unsleepingowl.katasecurity.dao.RoleDao;
 import ru.unsleepingowl.katasecurity.model.Role;
 
-import java.util.List;
 import java.util.Set;
 
 

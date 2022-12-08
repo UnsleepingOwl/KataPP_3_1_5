@@ -2,7 +2,6 @@ package ru.unsleepingowl.katasecurity.service;
 
 import ru.unsleepingowl.katasecurity.model.Role;
 
-import java.util.List;
 import java.util.Set;
 
 

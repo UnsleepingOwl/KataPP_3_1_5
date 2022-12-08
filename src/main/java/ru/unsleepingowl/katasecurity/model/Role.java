@@ -3,7 +3,6 @@ package ru.unsleepingowl.katasecurity.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -33,18 +32,9 @@ public class Role implements GrantedAuthority {
         this.authority = authority;
     }
 
-//    public Collection<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Collection<User> users) {
-//        this.users = users;
-//    }
-
     @Override
     public String toString() {
         return getAuthority();
-//                .substring(5);
     }
 
     @Override
