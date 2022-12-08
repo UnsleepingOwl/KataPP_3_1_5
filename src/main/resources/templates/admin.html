@@ -296,16 +296,21 @@
                                                         <div class="modal-body m-auto">
                                                             <form th:id="${'editForm'+user.id}"
                                                                   th:method="PUT"
-                                                                  th:action="@{/admin/id={id}(id=${user.getId()})}">
+                                                                  th:action="@{/admin/id={id}(id=${user.id})}"
+                                                                  th:object="${user}">
 
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| ID-->
                                                                     <div class="form-group text-center">
+                                                                        <fieldset disabled>
                                                                         <label for="edit_id" style="margin-bottom: 0">
                                                                             <strong>ID</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="text" th:value="*{user.id}"
-                                                                               id="edit_id" required>
+                                                                               readonly type="text"
+                                                                               th:value="${user.id}"
+                                                                               id="edit_id" name="id"
+                                                                               required>
+                                                                        </fieldset>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF ID-->
 
@@ -316,8 +321,9 @@
                                                                             <strong>First name</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="text" th:value="*{user.firstName}"
-                                                                               id="edit_first_name" required>
+                                                                               type="text" th:value="${user.firstName}"
+                                                                               id="edit_first_name" name="firstName"
+                                                                               required>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF FIRST NAME-->
 
@@ -328,8 +334,9 @@
                                                                             <strong>Last name</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="text" th:value="*{user.lastName}"
-                                                                               id="edit_last_name" required>
+                                                                               type="text" th:value="${user.lastName}"
+                                                                               id="edit_last_name" name="lastName"
+                                                                               required>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF LAST NAME-->
 
@@ -340,8 +347,9 @@
                                                                             <strong>Age</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="number" th:value="*{user.age}"
-                                                                               id="edit_age" required>
+                                                                               type="number" th:value="${user.age}"
+                                                                               id="edit_age" name="age"
+                                                                               required>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF AGE-->
 
@@ -352,8 +360,9 @@
                                                                             <strong>Email</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="text" th:value="*{user.username}"
-                                                                               id="edit_username" required>
+                                                                               type="text" th:value="${user.username}"
+                                                                               id="edit_username" name="username"
+                                                                               required>
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF EMAIL-->
 
@@ -364,8 +373,8 @@
                                                                             <strong>Password</strong>
                                                                         </label>
                                                                         <input class="form-control form-control-sm"
-                                                                               type="password" value=""
-                                                                               id="edit_password">
+                                                                               type="text" th:value="${user.password}"
+                                                                               id="edit_password" name="password">
                                                                     </div>
                                                                     <!-- |ADMIN| |ALL USERS| |EDIT| END OF PASSWORD-->
 
@@ -397,8 +406,9 @@
                                                             </button>
                                                             <button class="btn btn-info"
                                                                     type="submit"
-                                                                    th:form="${'editForm'+user.getId()}">Edit
+                                                                    th:form="${'editForm'+user.id}">Edit
                                                             </button>
+
                                                         </div>
                                                         <!-- |ADMIN| |ALL USERS| |EDIT| END OF BUTTONS-->
                                                     </div>
@@ -439,7 +449,7 @@
                                                         <div class="modal-body m-auto">
                                                             <form th:id="${'deleteForm'+user.id}"
                                                                   th:method="DELETE"
-                                                                  th:action="@{/admin/id={id}(id=${user.getId()})}">
+                                                                  th:action="@{/admin/id={id}(id=${user.id})}">
                                                                 <fieldset disabled>
 
                                                                     <!-- |ADMIN| |ALL USERS| |DELETE| ID-->

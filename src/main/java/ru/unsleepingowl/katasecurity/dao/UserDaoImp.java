@@ -43,7 +43,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void updateUser(User user, Long id, Set<String> rolesStringSet) {
-        if (user.getPassword().equals("")) {
+        if (user.getPassword().isEmpty()) {
             user.setPassword(getUserById(id).getPassword());
         } else {
             user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));

@@ -45,19 +45,20 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PatchMapping(value = "/id={id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult,
+    @PutMapping(value = "/id={id}")
+    public String updateUser(@ModelAttribute("user") User user,
                              @PathVariable("id") Long id,
+                             BindingResult bindingResult,
                              @RequestParam(value = "edit_roles_string_set") Set<String> rolesStringSet) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/admin";
-        }
         System.out.println("------------------------------------");
         System.out.println("------------------------------------");
         System.out.println("------------------------------------");
         System.out.println(rolesStringSet);
-
+        System.out.println(user.toString());
+        if (bindingResult.hasErrors()) {
+            System.out.println("ERROR");
+            return "redirect:/admin";
+        }
         userService.updateUser(user, id, rolesStringSet);
         return "redirect:/admin";
     }
