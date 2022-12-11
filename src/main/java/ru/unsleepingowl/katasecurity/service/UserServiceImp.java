@@ -7,7 +7,6 @@ import ru.unsleepingowl.katasecurity.dao.UserDao;
 import ru.unsleepingowl.katasecurity.model.User;
 
 import java.util.List;
-import java.util.Set;
 
 
 @Service
@@ -21,8 +20,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user, Set<String> rolesStringSet) {
-        userDao.addUser(user, rolesStringSet);
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 
     @Override
@@ -33,8 +32,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user, Long id, Set<String> rolesStringSet) {
-        userDao.updateUser(user, id, rolesStringSet);
+    public void updateUser(User user, Long id) {
+        userDao.updateUser(user, id);
     }
 
     @Override

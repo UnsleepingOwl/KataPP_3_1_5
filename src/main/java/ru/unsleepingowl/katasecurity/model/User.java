@@ -23,28 +23,28 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "email")
     @Email(message = "Email should be valid")
     @Size(min = 2, max = 24, message = "Username should be between 2 and 24 characters")
+    @Column(name = "email")
     private String username;
 
-    @Column(name = "first_name")
     @NotEmpty(message = "First name should not be empty")
     @Size(min = 2, max = 40, message = "Username should be between 2 and 30 characters")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotEmpty(message = "Last name should not be empty")
-    @Column(name = "last_name")
     @Size(min = 2, max = 40, message = "Username should be between 2 and 40 characters")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "password")
     @NotEmpty(message = "Password name should not be empty")
     @Size(min = 8, message = "Password should be at least 8 characters long")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "age")
     @Min(value = 1, message = "Age should be greater than 0")
+    @Column(name = "age")
     private Byte age;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -163,6 +163,6 @@ public class User implements UserDetails {
     }
 
     public void setRoles(Set<Role> roles) {
-        this.roles = (Set<Role>) roles;
+        this.roles = roles;
     }
 }
