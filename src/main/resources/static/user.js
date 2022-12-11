@@ -1,8 +1,8 @@
 $(async function () {
-    await getCurrentUserTable()
+    await getCurrentUserInfo()
 })
 
-async function getCurrentUserTable() {
+async function getCurrentUserInfo() {
     fetch("http://localhost:8081/api/user")
         .then(res => res.json())
         .then(data => {
