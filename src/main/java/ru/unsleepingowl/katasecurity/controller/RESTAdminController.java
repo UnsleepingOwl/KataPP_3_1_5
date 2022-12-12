@@ -3,13 +3,15 @@ package ru.unsleepingowl.katasecurity.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.unsleepingowl.katasecurity.DTO.RoleDTO;
 import ru.unsleepingowl.katasecurity.DTO.UserDTO;
 import ru.unsleepingowl.katasecurity.model.User;
+import ru.unsleepingowl.katasecurity.service.RoleService;
 import ru.unsleepingowl.katasecurity.service.UserService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,14 +19,11 @@ import java.util.stream.Collectors;
 public class RESTAdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public RESTAdminController(UserService userService) {
+    public RESTAdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
-    }
-
-    @GetMapping(value = "")
-    public ResponseEntity<UserDTO> getCurrentUser(Principal principal) {
-        return new ResponseEntity<>(new UserDTO(userService.findByUsername(principal.getName())), HttpStatus.OK);
+        this.roleService = roleService;
     }
 
     @GetMapping(value = "/all")
@@ -35,6 +34,11 @@ public class RESTAdminController {
     @GetMapping(value = "/id={id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(new UserDTO(userService.getUserById(id)), HttpStatus.FOUND);
+    }
+
+    @GetMapping(value = "/roles")
+    public ResponseEntity<Set<RoleDTO>> getAllRolesSet() {
+        return new ResponseEntity<>(convertRoleSetToDTOSet(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/new")
@@ -65,5 +69,9 @@ public class RESTAdminController {
 
     private List<UserDTO> convertUserListToDTOList() {
         return userService.getUsersList().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    private Set<RoleDTO> convertRoleSetToDTOSet() {
+        return roleService.getRolesSet().stream().map(RoleDTO::new).collect(Collectors.toSet());
     }
 }

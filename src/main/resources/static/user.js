@@ -7,16 +7,16 @@ async function getCurrentUserInfo() {
         .then(res => res.json())
         .then(data => {
 
-            let rolesSet = data.roles.map(r => r.authority.substring(5)).join(' ')
+            let rolesSet = data.roles.map(r => r.authority.substring(5)).join(" ")
 
-            $('#user_email')
+            $("#user_email")
                 .append(data.username)
 
-            $('#user_roles')
-                .append(' with roles: ')
+            $("#user_roles")
+                .append(" with roles: ")
                 .append(rolesSet)
 
-            $('#user_table')
+            $("#user_table")
                 .append(
                     `$(
             <tr>
