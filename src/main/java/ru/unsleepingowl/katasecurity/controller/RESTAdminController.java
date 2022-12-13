@@ -47,7 +47,7 @@ public class RESTAdminController {
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/update")
+    @PatchMapping(value = "/edit")
     public ResponseEntity<UserDTO> updateUser(@RequestBody @Valid UserDTO userDTO) {
         userService.updateUser(convertDTOToUser(userDTO), userDTO.getId());
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
