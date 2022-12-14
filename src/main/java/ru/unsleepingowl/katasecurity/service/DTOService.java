@@ -18,5 +18,4 @@ public interface DTOService {
     List<UserDTO> userListToDTOList();
 
     Set<RoleDTO> roleSetToDTOSet();
-
 }

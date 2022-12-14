@@ -1,9 +1,7 @@
 package ru.unsleepingowl.katasecurity.DTO;
 
-import org.springframework.security.core.GrantedAuthority;
 import ru.unsleepingowl.katasecurity.model.Role;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 public class RoleDTO {

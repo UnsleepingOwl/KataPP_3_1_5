@@ -1,6 +1,5 @@
 package ru.unsleepingowl.katasecurity.service;
 
-
 import org.springframework.stereotype.Service;
 import ru.unsleepingowl.katasecurity.DTO.RoleDTO;
 import ru.unsleepingowl.katasecurity.DTO.UserDTO;
@@ -23,7 +22,6 @@ public class DTOServiceImp implements DTOService {
         this.userDao = userDao;
         this.roleDao = roleDao;
     }
-
 
     @Override
     public User fromDTOToUser(UserDTO userDTO) {

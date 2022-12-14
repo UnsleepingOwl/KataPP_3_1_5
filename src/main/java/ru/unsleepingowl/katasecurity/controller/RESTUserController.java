@@ -23,5 +23,4 @@ public class RESTUserController {
     public ResponseEntity<UserDTO> getCurrentUser(Principal principal) {
         return new ResponseEntity<>(serviceDTO.userToDTO(principal.getName()), HttpStatus.OK);
     }
-
 }
