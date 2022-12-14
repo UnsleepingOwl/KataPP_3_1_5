@@ -14,20 +14,9 @@ public class RoleDaoImp implements RoleDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public void addRole(Role role) {
-        entityManager.persist(role);
-    }
-
-    @Override
-    public Role findByAuthority(String authority) {
-        return entityManager.createQuery("SELECT r FROM Role r WHERE r.authority = :authority", Role.class)
-                .setParameter("authority", authority).getSingleResult();
-    }
 
     @Override
     public Set<Role> getRolesSet() {
-        return new HashSet<Role>(entityManager.createQuery("FROM Role", Role.class)
-                .getResultList());
+        return new HashSet<>(entityManager.createQuery("FROM Role", Role.class).getResultList());
     }
 }

@@ -1,9 +1,11 @@
 package ru.unsleepingowl.katasecurity.service;
 
+import ru.unsleepingowl.katasecurity.DTO.RoleDTO;
+import ru.unsleepingowl.katasecurity.DTO.UserDTO;
 import ru.unsleepingowl.katasecurity.model.User;
 
 import java.util.List;
-
+import java.util.Set;
 
 public interface UserService {
 
@@ -19,7 +21,10 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    User createUser();
+    User convertDTOToUser(UserDTO userDTO);
 
+    List<UserDTO> convertUserListToDTOList();
+
+    Set<RoleDTO> convertRoleSetToDTOSet();
 
 }

@@ -16,6 +16,4 @@ public interface UserDao {
     User getUserById(Long id);
 
     User findByUsername(String username);
-
-    User createUser();
 }
