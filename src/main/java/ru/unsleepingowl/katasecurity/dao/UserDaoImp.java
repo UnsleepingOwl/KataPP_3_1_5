@@ -29,8 +29,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void addUser(User user) {
-            user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
-            entityManager.persist(user);
+        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
+        entityManager.persist(user);
     }
 
     @Override
@@ -49,9 +49,8 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<User> getUsersList() {
-        return entityManager.createQuery("FROM User").getResultList();
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override

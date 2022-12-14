@@ -53,6 +53,7 @@ async function getAllUsersTable() {
             })
         })
 }
+
 // END OF ALL USERS
 
 // NEW USER
@@ -101,6 +102,7 @@ async function createUser() {
         })
     })
 }
+
 // END OF NEW USER
 
 // MODAL EDIT
@@ -117,7 +119,7 @@ async function updateUser() {
     const editForm = document.forms["form_edit"]
     const editButton = document.getElementById("edit_confirm")
 
-        editButton.onclick = function editUser(event) {
+    editButton.onclick = function editUser(event) {
         event.preventDefault()
         let userRoles = []
         if (editForm.editUserRoles !== undefined) {
@@ -147,6 +149,7 @@ async function updateUser() {
         })
     }
 }
+
 // END OF UPDATE USER
 
 
@@ -168,7 +171,7 @@ async function deleteUser() {
 
         event.preventDefault()
 
-        fetch("http://localhost:8081/api/admin/id=" +deleteForm.id.value, {
+        fetch("http://localhost:8081/api/admin/id=" + deleteForm.id.value, {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -186,6 +189,7 @@ async function deleteUser() {
         })
     }
 }
+
 // END OF DELETE USER
 
 

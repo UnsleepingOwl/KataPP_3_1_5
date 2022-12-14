@@ -32,9 +32,6 @@ public class UserDTO {
 
     private Set<Role> roles;
 
-    public UserDTO() {
-    }
-
     public UserDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
@@ -100,7 +97,6 @@ public class UserDTO {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 
 
     @Override

@@ -6,6 +6,8 @@ import java.util.Set;
 
 public interface RoleDao {
     Role findByAuthority(String authority);
+
     void addRole(Role role);
+
     Set<Role> getRolesSet();
 }
