@@ -1,6 +1,7 @@
 package ru.unsleepingowl.katasecurity.dao;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.unsleepingowl.katasecurity.model.User;
 
@@ -14,11 +15,11 @@ public class UserDaoImp implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
 
     @Override
     public void addUser(User user) {
-        user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
+        user.setPassword(ENCODER.encode(user.getPassword()));
         entityManager.persist(user);
     }
 
@@ -32,7 +33,7 @@ public class UserDaoImp implements UserDao {
         if (user.getPassword().equals("")) {
             user.setPassword(getUserById(id).getPassword());
         } else {
-            user.setPassword(PASSWORD_ENCODER.encode(user.getPassword()));
+            user.setPassword(ENCODER.encode(user.getPassword()));
         }
         entityManager.merge(user);
     }
